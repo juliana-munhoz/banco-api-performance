@@ -5,7 +5,17 @@ import { obterBaseURL } from '../utils/variaveis.js';
 const postTransferencias = JSON.parse(open('../fixtures/postTransferencias.json'));
 
 export const options = {
-  iterations: 1
+  stages: [
+    {duration: '10s', target:10 },
+    {duration: '10s', target:30 },
+    {duration: '20s', target:30 },
+    {duration: '20s', target:0  }
+  ],
+  Thresholds:{
+    http_req_duration: ['p(95)<3000','min<5000'],
+    iteration_duration: ['avg<3000'], 
+    http_req_failed: ['rate<0.01']
+  }
 };
 
 export default function () {
